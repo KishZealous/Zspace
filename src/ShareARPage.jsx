@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { storage, ref, getDownloadURL } from "./firebase";
+import { storage } from "./firebase";
+import { ref, getDownloadURL } from "firebase/storage";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, Environment, Center } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Button } from "@mui/material";
 import * as THREE from "three";
+import { Button } from "@mui/material";
 
 const ShareARPage = () => {
   const { projectName } = useParams();
@@ -113,100 +114,22 @@ const ShareARPage = () => {
         </Center>
       </Canvas>
 
-
-{/* Share button and exit button */}
-    <div className="preview-viewer-container">
-
-    <Button 
-      className="movebutton"
-      variant="contained"
-      startIcon={<img src="/icons/arrows.svg" />} onClick={handleMove}
-      
-    ></Button>
-
-    <Button 
-      className="zoomout"
-      variant="contained"
-      startIcon={<img src="/icons/zoom-out.svg" />}  onClick={handleZoomOut}
-    
-    ></Button>
-
-    <Button 
-      className="zoomin"
-      variant="contained"
-      startIcon={<img src="/icons/zoom-in.svg"/>}
-    onClick={handleZoomIn}
-    ></Button>
-
-    <Button 
-      className="colorpicker"
-      variant="contained"
-      startIcon={<img src="/icons/color-wheel.png" />} onClick={toggleColorPicker}  ></Button>
-    </div>
-
-{/* Preview model area showing position, scale and color 
-      <div
-        className="preview-model"
-        style={{
-          marginTop: 20,
-          width: 300,
-          height: 300,
-          backgroundColor: color,
-          transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
-          transition: "transform 0.3s ease",
-          border: "1px solid #ccc",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          userSelect: "none",
-        }}
-      >
-        <p></p>
-      </div>*/}
-
-
-      {/* Color picker dialog */}
-      <Dialog open={colorPickerOpen} onClose={toggleColorPicker}>
-        <DialogTitle>Pick a Color</DialogTitle>
-        <DialogContent>
-          <input
-            type="color"
-            value={color}
-            onChange={handleColorChange}
-            style={{ width: "100%", height: 40, border: "none",borderRadius:'5',cursor:'pointer',
-          backgroundColor: color,
-          transition: "transform 0.3s ease",
-           }}
-          />
-        </DialogContent>
-      </Dialog>
-
       {/* AR Button */}
-      <div className='Arviewbutton-container'
+      <div
         style={{
           position: "absolute",
           top: "20px",
           right: "20px",
         }}
       >
-        {/* <Button
-          variant="contained"
-          startIcon={<img className="Aricon-icon" src="/icons/Aricon.svg" alt="AR Icon" />}  
-          onClick={openARView}
-        >
-          See in Your Space
-        </Button> */}
-
-        <Button 
+        <Button
           className="ARbutton"
           variant="contained"
-          startIcon={<img className="Aricon-icon" src="/icons/Aricon.svg" />}
+          startIcon={<img className="Aricon-icon" src="/icons/Aricon.svg" alt="AR Icon" />}
           onClick={openARView}
         >
           See in your Space
         </Button>
-
-        
       </div>
     </div>
   );
